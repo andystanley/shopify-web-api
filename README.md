@@ -1,4 +1,4 @@
-# Shopify Web API
+# Shopify Web API Documentation
 
 
 ## Getting Started
