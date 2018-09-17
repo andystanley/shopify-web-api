@@ -1,8 +1,9 @@
 # Shopify Web API Documentation
 
 1. [Getting Started](#getting-started)
- * [Get Started Right Away With GraphiQL](#get-started-right-away-with-graphiql)
+ * [Get started with GraphiQL](#get-started-with-graphiql)
  * [Using Your Own Client](#using-your-own-client)
+ * [Make your first query](#make-your-first-query)
 2. [Using the API](#using-the-api)
  * [Create a shop](#create-a-shop)
  * [Add products to a shop](#add-products-to-a-shop)
@@ -13,13 +14,14 @@
  * [Deployment](#deployment)
 
 ## Getting Started
-### Get started right away with GraphiQL
+### Get started with GraphiQL
 To start using the API right away, use the interactive GraphiQL environment.  
 
 ### Using your own client
 If you prefer to use another API client like Postman or Insomnia, please use the following settings.
-* Endpoint: http://35.232.2.64/v1alpha1/graphql
-* Add the following access key header `X-Hasura-Access-Key : value`
+* Endpoint: [http://35.232.2.64/v1alpha1/graphql](http://35.232.2.64/v1alpha1/graphql)
+* Add the following access key header:  
+`X-Hasura-Access-Key : mykey`
 
 ### Make your first query
 Once you've chosen a client, you can test out the API by running the following query:
@@ -213,11 +215,11 @@ query {
 }
 ```
 
-Great!  We've now learned how to
-* Create our own shop
-* Add products to our shop
+Great!  You now know how to:
+* Create a shop
+* Add products a shop
 * Create an order
-* Add items to our order
+* Add line items to an order
 
 ## Extra Info
 ### Development
