@@ -1,10 +1,67 @@
 # Shopify Web API Documentation
 
+1. [Getting Started](#getting-started)
+ * [Get Started Right Away With GraphiQL](#get-started-right-away-with-graphiql)
+ * [Using Your Own Client](#using-your-own-client)
+2. [Using the API](#using-the-api)
+ * [Create a shop](#create-a-shop)
+ * [Add products to a shop](#add-products-to-a-shop)
+ * [Create an order](#create-an-order)
+ * [Add line items to an order](#add-line-items-to-an-order)
+3. [Extra Info](#extra-info)
+ * [Development](#development)
+ * [Deployment](#deployment)
 
 ## Getting Started
-Head on over to https://my-api.com/
+### Get started right away with GraphiQL
+To start using the API right away, use the interactive GraphiQL environment.  
 
-## Create a Shop
+### Using your own client
+If you prefer to use another API client like Postman or Insomnia, please use the following settings.
+* Endpoint: http://35.232.2.64/v1alpha1/graphql
+* Add the following access key header `X-Hasura-Access-Key : value`
+
+### Make your first query
+Once you've chosen a client, you can test out the API by running the following query:
+```graphql
+query {
+  shop {
+    name,
+    products {
+      name,
+      quantity,
+      value
+    }
+  }
+}
+```
+A successful query should return a similar looking response:
+```json
+{
+  "data": {
+    "shop": [
+      {
+        "name": "Toronto Farmers' Market",
+        "products": [
+          {
+            "quantity": 115,
+            "value": 0.5,
+            "name": "Tomatoes"
+          },
+          {
+            "quantity": 49,
+            "value": 5,
+            "name": "Pumpkins"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## Using the API
+### Create a Shop
 Let's start off by creating a shop.  Your shop id is what you will use to reference your shop later.
 ```graphql
 mutation new_shop {
@@ -37,7 +94,7 @@ query {
 ```
 Looks like we have a shop, but now we need some products!   
 
-## Add Products to your Shop
+### Add Products to a Shop
 Now that we have a shop, let's add some products.  Use your shop id to ensure the new products end up in your shop.
 ```graphql
 mutation new_products {
@@ -82,7 +139,7 @@ query {
 ```
 Great!  Now that our store has some products, our customers can place orders.
 
-## Create an order
+### Create an order
 We've got a store and products.  Let's place our first order.
 ```graphql
 mutation new_order {
@@ -114,7 +171,7 @@ query {
 }
 ```
 Hmmmm, looks like we're missing some line items.  Let's add some.
-## Add Line Items to an Order
+### Add Line Items to an Order
 Let's go ahead and add some line items to our new order.
 ```graphql
 mutation new_line_items {
@@ -161,3 +218,9 @@ Great!  We've now learned how to
 * Add products to our shop
 * Create an order
 * Add items to our order
+
+## Extra Info
+### Development
+This GraphQL API was developed with [Hasura](https://hasura.io/).  I chose Hasura as it allows rapid API development and easy integration with Docker and Kubernetes.  All data is persisted on a PostgreSQL database on Google Cloud Platform.
+### Deployment
+The API is deployed as a pod in a Kubernetes cluster on Google Cloud Platform.  The GraphiQL client is deployed as another pod in the same cluster.
