@@ -15,7 +15,7 @@
 
 ## Getting Started
 ### Get started with GraphiQL
-To start using the API right away, use the interactive GraphiQL environment.  
+To start using the API right away, use the interactive GraphiQL environment hosted at [http://35.224.16.95/](http://35.224.16.95/).  
 
 ### Using your own client
 If you prefer to use another API client like Postman or Insomnia, please use the following settings.
