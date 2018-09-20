@@ -1,4 +1,9 @@
 # Shopify Web API Documentation
+This GraphQL API was built as part of Shopify's Developer Intern Challenge.  This API meets the basic requirements as well as tackling many of the extra credit features including:
+* Supporting full CRUD operations
+* Securing the API
+* Building the API using GraphQL
+* Deploying the API to a Kubernetes cluster on Google Cloud Platform  
 
 1. [Getting Started](#getting-started)
  * [Get started with GraphiQL](#get-started-with-graphiql)
