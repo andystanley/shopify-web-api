@@ -7,8 +7,8 @@ This GraphQL API was built as part of Shopify's Developer Intern Challenge.  Thi
 
 # Documentation
 1. [Getting Started](#getting-started)
- * [Get started with GraphiQL](#get-started-with-graphiql)
- * [Using Your Own Client](#using-your-own-client)
+ * [QuickStart with GraphiQL](#quickstart-with-graphiql)
+ * [Using a different Client](#using-a-different-client)
  * [Make your first query](#make-your-first-query)
 2. [Using the API](#using-the-api)
  * [Create a shop](#create-a-shop)
@@ -20,11 +20,11 @@ This GraphQL API was built as part of Shopify's Developer Intern Challenge.  Thi
  * [Deployment](#deployment)
 
 ## Getting Started
-### Get started with GraphiQL
+### QuickStart with GraphiQL
 To start using the API right away, use the interactive GraphiQL environment hosted at [http://35.224.16.95/](http://35.224.16.95/).  
 
-### Using your own client
-If you prefer to use another API client like Postman or Insomnia, please use the following settings.
+### Using a different client
+If you prefer to use another API client such as Insomnia, please use the following settings:
 * Endpoint: [http://35.232.2.64/v1alpha1/graphql](http://35.232.2.64/v1alpha1/graphql)
 * Add the following access key header:  
 `X-Hasura-Access-Key : mykey`
@@ -87,12 +87,14 @@ mutation new_shop {
   }
 }	
 ```
-Awesome!  Let's check out our newly created shop.
+Awesome!  Let's check out our newly created shop by running the following query:
 ```graphql
 query {
-  shop {
+  shop(where: {name: {_eq: "Nofrills"}}) {
+    id,
     name,
     products {
+      id
       name,
       quantity,
       value
@@ -100,10 +102,24 @@ query {
   }
 }
 ```
+A successful query should return a similar looking response:
+```json
+{
+  "data": {
+    "shop": [
+      {
+        "name": "Nofrills",
+        "id": 3,
+        "products": []
+      }
+    ]
+  }
+}
+```
 Looks like we have a shop, but now we need some products!   
 
 ### Add Products to a Shop
-Now that we have a shop, let's add some products.  Use your shop id to ensure the new products end up in your shop.
+Now that we have a shop, let's add some products.  **Use your shop id to ensure the new products end up in your shop.**
 ```graphql
 mutation new_products {
   insert_product(
@@ -112,13 +128,13 @@ mutation new_products {
         name: "Cucumbers",
         quantity: 30,
         value: 0.15,
-        shop_id: 2
+        shop_id: 3
       },
       {
         name: "Apples",
         quantity: 50,
         value: 0.85,
-        shop_id: 2
+        shop_id: 3
       },
     ]
   ) {
@@ -135,13 +151,42 @@ mutation new_products {
 Let's run that query again to check out the new products.
 ```graphql
 query {
-  shop {
+  shop(where: {name: {_eq: "Nofrills"}}) {
+    id,
     name,
     products {
+      id
       name,
       quantity,
       value
     }
+  }
+}
+```
+A successful query should return a similar looking response:
+```json
+{
+  "data": {
+    "shop": [
+      {
+        "name": "Nofrills",
+        "id": 3,
+        "products": [
+          {
+            "quantity": 30,
+            "value": 0.15,
+            "name": "Cucumbers",
+            "id": 5
+          },
+          {
+            "quantity": 50,
+            "value": 0.85,
+            "name": "Apples",
+            "id": 6
+          }
+        ]
+      }
+    ]
   }
 }
 ```
@@ -154,7 +199,7 @@ mutation new_order {
   insert_order(
     objects: [
       {
-        shop_id: 2
+        shop_id: 3
       }
     ]
   ) {
@@ -168,13 +213,30 @@ mutation new_order {
 We've created our first order, let's check it out.
 ```graphql
 query {
-  order {
+  order(where: {shop: {name: {_eq: "Nofrills"}}}) {
     id
     shop_id
     line_items {
+      product {
+      	name
+    	}
       quantity
       value
     }
+  }
+}
+```
+A successful query should return a similar looking response:
+```json
+{
+  "data": {
+    "order": [
+      {
+        "line_items": [],
+        "shop_id": 3,
+        "id": 3
+      }
+    ]
   }
 }
 ```
@@ -186,19 +248,18 @@ mutation new_line_items {
   insert_line_item(
     objects: [
       {
-        order_id: 5
-        product_id: 14
+        order_id: 2
+        product_id: 5
         quantity: 5,
       },
       {
-        order_id: 5
-        product_id: 14,
+        order_id: 2
+        product_id: 6,
         quantity: 5,
       }
     ]
   ) {
     returning {
-      id
       product_id
       quantity
       value
@@ -210,13 +271,45 @@ mutation new_line_items {
 Let's run that query again to check out the order with our new line_items.
 ```graphql
 query {
-  order {
+  order(where: {shop: {name: {_eq: "Nofrills"}}}) {
     id
     shop_id
     line_items {
+      product {
+      	name
+    	}
       quantity
       value
     }
+  }
+}
+```
+A successful query should return a similar looking response:
+```json
+{
+  "data": {
+    "order": [
+      {
+        "line_items": [
+          {
+            "quantity": 5,
+            "value": 0.75,
+            "product": {
+              "name": "Cucumbers"
+            }
+          },
+          {
+            "quantity": 5,
+            "value": 4.25,
+            "product": {
+              "name": "Apples"
+            }
+          }
+        ],
+        "shop_id": 2,
+        "id": 2
+      }
+    ]
   }
 }
 ```
