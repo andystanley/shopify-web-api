@@ -26,7 +26,7 @@ To start using the API right away, use the interactive GraphiQL environment host
 ### Using a different client
 If you prefer to use another API client such as Insomnia, please use the following settings:
 * Endpoint: [http://35.232.2.64/v1alpha1/graphql](http://35.232.2.64/v1alpha1/graphql)
-* Add the following access key header:  
+* Add the following header:  
 `X-Hasura-Access-Key : mykey`
 
 ### Make your first query
@@ -119,7 +119,7 @@ A successful query should return a similar looking response:
 Looks like we have a shop, but now we need some products!   
 
 ### Add Products to a Shop
-Now that we have a shop, let's add some products.  **Use your shop id to ensure the new products end up in your shop.**
+Now that we have a shop, let's add some products.  **Use your shop id from the previous query to ensure the new products end up in your shop.**
 ```graphql
 mutation new_products {
   insert_product(
@@ -193,7 +193,7 @@ A successful query should return a similar looking response:
 Great!  Now that our store has some products, our customers can place orders.
 
 ### Create an order
-We've got a store and products.  Let's place our first order.
+We've got a store and products.  Let's place our first order.  **Use your shop id from the previous query.**
 ```graphql
 mutation new_order {
   insert_order(
@@ -210,7 +210,7 @@ mutation new_order {
   }
 }
 ```
-We've created our first order, let's check it out.
+We've created our first order, let's check it out.  
 ```graphql
 query {
   order(where: {shop: {name: {_eq: "Nofrills"}}}) {
@@ -242,7 +242,7 @@ A successful query should return a similar looking response:
 ```
 Hmmmm, looks like we're missing some line items.  Let's add some.
 ### Add Line Items to an Order
-Let's go ahead and add some line items to our new order.
+Let's go ahead and add some line items to our new order.  **Use your order id and product ids from the previous queries to ensure the correct products end up in your order.**
 ```graphql
 mutation new_line_items {
   insert_line_item(
@@ -316,7 +316,7 @@ A successful query should return a similar looking response:
 
 Great!  You now know how to:
 * Create a shop
-* Add products a shop
+* Add products to a shop
 * Create an order
 * Add line items to an order
 
