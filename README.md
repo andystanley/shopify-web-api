@@ -27,7 +27,7 @@ To start using the API right away, use the interactive GraphiQL environment host
 If you prefer to use another API client such as Insomnia, please use the following settings:
 * Endpoint: [http://35.232.2.64/v1alpha1/graphql](http://35.232.2.64/v1alpha1/graphql)
 * Add the following header:  
-`X-Hasura-Access-Key : mykey`
+`"X-Hasura-Access-Key" : "ab654f89"`
 
 ### Make your first query
 Once you've chosen a client, you can test out the API by running the following query:
@@ -36,8 +36,8 @@ query {
   shop {
     name,
     products {
-      name,
-      quantity,
+      name
+      quantity
       value
     }
   }
@@ -95,8 +95,8 @@ query {
     name,
     products {
       id
-      name,
-      quantity,
+      name
+      quantity
       value
     }
   }
@@ -109,7 +109,7 @@ A successful query should return a similar looking response:
     "shop": [
       {
         "name": "Nofrills",
-        "id": 3,
+        "id": 8,
         "products": []
       }
     ]
@@ -128,13 +128,13 @@ mutation new_products {
         name: "Cucumbers",
         quantity: 30,
         value: 0.15,
-        shop_id: 3
+        shop_id: 8
       },
       {
         name: "Apples",
         quantity: 50,
         value: 0.85,
-        shop_id: 3
+        shop_id: 8
       },
     ]
   ) {
@@ -156,8 +156,8 @@ query {
     name,
     products {
       id
-      name,
-      quantity,
+      name
+      quantity
       value
     }
   }
@@ -170,19 +170,19 @@ A successful query should return a similar looking response:
     "shop": [
       {
         "name": "Nofrills",
-        "id": 3,
+        "id": 8,
         "products": [
           {
             "quantity": 30,
             "value": 0.15,
             "name": "Cucumbers",
-            "id": 5
+            "id": 16
           },
           {
             "quantity": 50,
             "value": 0.85,
             "name": "Apples",
-            "id": 6
+            "id": 17
           }
         ]
       }
@@ -199,7 +199,7 @@ mutation new_order {
   insert_order(
     objects: [
       {
-        shop_id: 3
+        shop_id: 8
       }
     ]
   ) {
@@ -233,8 +233,8 @@ A successful query should return a similar looking response:
     "order": [
       {
         "line_items": [],
-        "shop_id": 3,
-        "id": 3
+        "shop_id": 8,
+        "id": 8
       }
     ]
   }
@@ -248,14 +248,14 @@ mutation new_line_items {
   insert_line_item(
     objects: [
       {
-        order_id: 2
-        product_id: 5
+        order_id: 8,
+        product_id: 16,
         quantity: 5,
       },
       {
-        order_id: 2
-        product_id: 6,
-        quantity: 5,
+        order_id: 8,
+        product_id: 17,
+        quantity: 5
       }
     ]
   ) {
@@ -306,8 +306,8 @@ A successful query should return a similar looking response:
             }
           }
         ],
-        "shop_id": 2,
-        "id": 2
+        "shop_id": 8,
+        "id": 8
       }
     ]
   }
