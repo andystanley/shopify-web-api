@@ -322,6 +322,6 @@ Great!  You now know how to:
 
 ## Extra Info
 ### Development
-This GraphQL API was developed with [Hasura](https://hasura.io/).  I chose Hasura as it allows rapid API development and easy integration with Docker and Kubernetes.  All data is persisted on a PostgreSQL database on Google Cloud Platform.
+This GraphQL API was developed with [Hasura](https://hasura.io/).  I chose Hasura as it allows rapid API development and easy integration with Docker and Kubernetes.  All data is persisted on a PostgreSQL database hosted on Google Cloud Platform.
 ### Deployment
 The API is deployed as a pod in a Kubernetes cluster on Google Cloud Platform.  The GraphiQL client is deployed as another pod in the same cluster.
