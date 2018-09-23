@@ -241,6 +241,7 @@ A successful query should return a similar looking response:
 }
 ```
 Hmmmm, looks like we're missing some line items.  Let's add some.
+
 ### Add Line Items to an Order
 Let's go ahead and add some line items to our new order.  **Use your order id and product ids from the previous queries to ensure the correct products end up in your order.**
 ```graphql
@@ -268,7 +269,7 @@ mutation new_line_items {
   }
 }
 ```
-Let's run that query again to check out the order with our new line_items.
+Let's run that query again to check out the order with our new line items.
 ```graphql
 query {
   order(where: {shop: {name: {_eq: "Nofrills"}}}) {
