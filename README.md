@@ -91,8 +91,8 @@ Awesome!  Let's check out our newly created shop by running the following query:
 ```graphql
 query {
   shop(where: {name: {_eq: "Nofrills"}}) {
-    id,
-    name,
+    id
+    name
     products {
       id
       name
@@ -109,7 +109,7 @@ A successful query should return a similar looking response:
     "shop": [
       {
         "name": "Nofrills",
-        "id": 8,
+        "id": 9,
         "products": []
       }
     ]
@@ -128,13 +128,13 @@ mutation new_products {
         name: "Cucumbers",
         quantity: 30,
         value: 0.15,
-        shop_id: 8
+        shop_id: 9
       },
       {
         name: "Apples",
         quantity: 50,
         value: 0.85,
-        shop_id: 8
+        shop_id: 9
       },
     ]
   ) {
@@ -170,19 +170,19 @@ A successful query should return a similar looking response:
     "shop": [
       {
         "name": "Nofrills",
-        "id": 8,
+        "id": 9,
         "products": [
           {
             "quantity": 30,
             "value": 0.15,
             "name": "Cucumbers",
-            "id": 16
+            "id": 18
           },
           {
             "quantity": 50,
             "value": 0.85,
             "name": "Apples",
-            "id": 17
+            "id": 19
           }
         ]
       }
@@ -199,7 +199,7 @@ mutation new_order {
   insert_order(
     objects: [
       {
-        shop_id: 8
+        shop_id: 9
       }
     ]
   ) {
@@ -233,8 +233,8 @@ A successful query should return a similar looking response:
     "order": [
       {
         "line_items": [],
-        "shop_id": 8,
-        "id": 8
+        "shop_id": 9,
+        "id": 9
       }
     ]
   }
@@ -248,13 +248,13 @@ mutation new_line_items {
   insert_line_item(
     objects: [
       {
-        order_id: 8,
-        product_id: 16,
-        quantity: 5,
+        order_id: 9,
+        product_id: 18,
+        quantity: 5
       },
       {
-        order_id: 8,
-        product_id: 17,
+        order_id: 9,
+        product_id: 19,
         quantity: 5
       }
     ]
@@ -306,8 +306,8 @@ A successful query should return a similar looking response:
             }
           }
         ],
-        "shop_id": 8,
-        "id": 8
+        "shop_id": 9,
+        "id": 9
       }
     ]
   }
