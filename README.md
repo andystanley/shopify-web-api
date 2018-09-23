@@ -34,7 +34,7 @@ Once you've chosen a client, you can test out the API by running the following q
 ```graphql
 query {
   shop {
-    name,
+    name
     products {
       name
       quantity
