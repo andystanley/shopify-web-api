@@ -1,9 +1,12 @@
 # Shopify Web API
-This GraphQL API was built as part of Shopify's Developer Intern Challenge.  This API meets the basic requirements as well as tackling many of the extra credit features including:
-* Supporting full CRUD operations
-* Securing the API
-* Building the API using GraphQL
-* Deploying the API to a Kubernetes cluster on Google Cloud Platform  
+This GraphQL API was modelled after a simple version of the Shopify API.  The project is currently not deployed, as it is expensive to run.  If you would like to see it running, please reach out to me and I would be more than happy to host it for a couple days.  
+**Noteable Features:**
+* Supports full CRUD operations
+* Secured with access keys
+* Built with Hasura
+* Data is persisted in a PostgreSQL database
+* Was originally deployed to a Kubernetes cluster on Google Cloud Platform 
+* Has an interactive GraphiQL client
 
 # Documentation
 1. [Getting Started](#getting-started)
@@ -15,17 +18,14 @@ This GraphQL API was built as part of Shopify's Developer Intern Challenge.  Thi
  * [Add products to a shop](#add-products-to-a-shop)
  * [Create an order](#create-an-order)
  * [Add line items to an order](#add-line-items-to-an-order)
-3. [Extra Info](#extra-info)
- * [Development](#development)
- * [Deployment](#deployment)
 
 ## Getting Started
 ### QuickStart with GraphiQL
-To start using the API right away, use the interactive GraphiQL environment hosted at [http://35.224.16.95/](http://35.224.16.95/).  
+To start using the API right away, use the interactive GraphiQL environment hosted at ~~http://35.224.16.95/.~~
 
 ### Using a different client
 If you prefer to use another API client such as Insomnia, please use the following settings:
-* Endpoint: [http://35.232.2.64/v1alpha1/graphql](http://35.232.2.64/v1alpha1/graphql)
+* Endpoint: ~~http://35.232.2.64/v1alpha1/graphql~~
 * Add the following header:  
 `"X-Hasura-Access-Key" : "ab654f89"`
 
@@ -320,9 +320,3 @@ Great!  You now know how to:
 * Add products to a shop
 * Create an order
 * Add line items to an order
-
-## Extra Info
-### Development
-This GraphQL API was developed with [Hasura](https://hasura.io/).  I chose Hasura as it allows rapid API development and easy integration with Docker and Kubernetes.  All data is persisted on a PostgreSQL database hosted on Google Cloud Platform.
-### Deployment
-The API is deployed as a pod in a Kubernetes cluster on Google Cloud Platform.  The GraphiQL client is deployed as another pod in the same cluster.
